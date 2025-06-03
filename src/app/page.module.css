@@ -166,3 +166,41 @@ a.secondary {
     filter: invert();
   }
 }
+
+.heroTitle {
+  font-size: 2.5rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.heroSubtitle {
+  font-size: 1.25rem;
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.howItWorks {
+  margin-top: 3rem;
+  background: #f9f9f9;
+  padding: 2rem;
+  border-radius: 12px;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.primary {
+  display: inline-block;
+  background: #0070f3;
+  color: #fff;
+  padding: 0.75rem 2rem;
+  border-radius: 8px;
+  font-weight: 600;
+  text-decoration: none;
+  margin-bottom: 1.5rem;
+  transition: background 0.2s;
+}
+.primary:hover {
+  background: #0059c1;
+}

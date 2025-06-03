@@ -1,0 +1,48 @@
+import { NextResponse } from "next/server";
+import axios from "axios";
+import * as cheerio from "cheerio";
+
+export async function GET() {
+  try {
+    const url = "https://fundhub.wa.gov/funding-opportunities/";
+    const { data: html } = await axios.get(url);
+    const $ = cheerio.load(html);
+
+    const opportunities: any[] = [];
+
+    $(".MuiCard-root, .funding-opportunity-card").each((_, el) => {
+      const title = $(el).find(".MuiTypography-h5, .funding-title").text().trim();
+      let link = $(el).find("a").attr("href") || "";
+      if (link && !link.startsWith("http")) {
+        link = `https://fundhub.wa.gov${link}`;
+      }
+      const status = $(el).find(".MuiChip-label, .funding-status").text().trim();
+      const amount = $(el).find(".MuiTypography-body1, .funding-amount").text().trim();
+      const deadline = $(el).find(".funding-deadline, .MuiTypography-caption").text().trim();
+      const category = $(el).find(".funding-category").text().trim();
+      const eligibility = $(el).find(".funding-eligibility").text().trim();
+
+      if (title && link) {
+        opportunities.push({
+          id: link,
+          title,
+          source: "FundHubWA",
+          status,
+          amount,
+          link,
+          deadline,
+          category,
+          eligibility,
+        });
+      }
+    });
+
+    // Log the number of opportunities found
+    console.log("Opportunities found:", opportunities.length);
+
+    return NextResponse.json(opportunities);
+  } catch (error) {
+    console.error("Error scraping FundHubWA:", error);
+    return NextResponse.json({ error: "Failed to fetch opportunities" }, { status: 500 });
+  }
+}

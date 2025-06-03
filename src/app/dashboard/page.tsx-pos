@@ -1,0 +1,65 @@
+"use client";
+import { useEffect, useState } from "react";
+import styles from "./Dashboard.module.css";
+
+type RFP = {
+  id: string;
+  number: string;
+  title: string;
+  status: string;
+  bidDueDate?: string;
+  category: string;
+  link: string;
+};
+
+export default function Dashboard() {
+  const [rfps, setRfps] = useState<RFP[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    fetch("/api/rfps/port-of-seattle")
+      .then(res => res.json())
+      .then(data => {
+        // Optional: sort by number
+        data.sort((a, b) => a.number.localeCompare(b.number));
+        setRfps(data);
+        setLoading(false);
+      });
+  }, []);
+
+  return (
+    <div className={styles.container}>
+      <h1>Port of Seattle RFPs</h1>
+      {loading ? (
+        <p>Loading...</p>
+      ) : (
+        <table className={styles.table}>
+          <thead>
+            <tr>
+              <th>Number</th>
+              <th>Title</th>
+              <th>Status</th>
+              <th>Due Date</th>
+              <th>Category</th>
+              <th>Link</th>
+            </tr>
+          </thead>
+          <tbody>
+            {rfps.map(rfp => (
+              <tr key={rfp.id}>
+                <td>{rfp.number}</td>
+                <td>{rfp.title}</td>
+                <td>{rfp.status}</td>
+                <td>{rfp.bidDueDate ? new Date(rfp.bidDueDate).toLocaleDateString() : ""}</td>
+                <td>{rfp.category}</td>
+                <td>
+                  <a href={rfp.link} target="_blank" rel="noopener noreferrer" className={styles.link}>View</a>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      )}
+    </div>
+  );
+}
