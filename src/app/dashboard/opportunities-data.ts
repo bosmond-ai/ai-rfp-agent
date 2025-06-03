@@ -1,0 +1,36 @@
+const opportunities = [
+  {
+    id: "1",
+    title: "Community Development Block Grants",
+    status: "Active",
+    amount: "$1 - $2,000,000",
+    audience: "Local Government",
+    sector: "Infrastructure, Energy Efficiency",
+    activity: "Efficiency Improvements, Financial Assistance",
+    openDate: "",
+    closeDate: "",
+    link: "#",
+    requirements: "Applicants must be local governments. Projects must address community development needs.",
+    scope: "Infrastructure improvements, energy efficiency upgrades, and financial assistance programs.",
+    totalFund: "$2,000,000",
+    duration: "1-2 years",
+  },
+  {
+    id: "2",
+    title: "State Home Electrification and Appliance Rebate Program (HEAR)",
+    status: "Active",
+    amount: "$1 - $77,600,000",
+    audience: "Businesses, Individuals, Local Government, Nonprofits, Tribes, Utilities",
+    sector: "Buildings & Infrastructure, Energy Efficiency, Residential",
+    activity: "Efficiency Improvements, Financial Assistance",
+    openDate: "",
+    closeDate: "",
+    link: "#",
+    requirements: "Eligible applicants include businesses, individuals, and local governments. Projects must focus on home electrification.",
+    scope: "Rebates for appliance upgrades, home electrification, and energy efficiency projects.",
+    totalFund: "$77,600,000",
+    duration: "Up to 3 years",
+  },
+];
+
+export default opportunities; 
