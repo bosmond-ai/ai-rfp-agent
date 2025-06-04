@@ -88,7 +88,6 @@ type Activity = {
 
 export default function Dashboard() {
   const [showModal, setShowModal] = useState(false);
-  const [selectedOpp, setSelectedOpp] = useState<Opportunity | null>(null);
   const { user, isLoading } = useUser();
   const [profile, setProfile] = useState<UserProfile | null>(null);
   const [loadingProfile, setLoadingProfile] = useState(true);
@@ -211,17 +210,17 @@ export default function Dashboard() {
       </main>
 
       {/* Apply Modal */}
-      {showModal && selectedOpp && (
+      {showModal && (
         <div style={{ position: "fixed", top: 0, left: 0, width: "100vw", height: "100vh", background: "rgba(0,0,0,0.4)", display: "flex", alignItems: "center", justifyContent: "center", zIndex: 1000 }}>
           <div style={{ background: "#fff", borderRadius: 16, padding: 32, minWidth: 400, maxWidth: "90vw", boxShadow: "0 4px 32px rgba(0,0,0,0.12)", color: "#183a4a" }}>
-            <h3 style={{ marginBottom: 12 }}>{selectedOpp.title}</h3>
+            <h3 style={{ marginBottom: 12 }}>Opportunity Title</h3>
             <p style={{ marginBottom: 16 }}>Grant Requirements: (placeholder for requirements and details)</p>
             <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
               <button onClick={() => alert("User will apply themselves")}
                 style={{ background: "#3bb273", color: "#fff", border: "none", borderRadius: 6, padding: "10px 0", fontWeight: 600, fontSize: 16, cursor: "pointer" }}>
                 Apply Myself
               </button>
-              <button onClick={() => window.location.href = `/apply-with-bosmond?opp=${encodeURIComponent(selectedOpp.id)}`}
+              <button onClick={() => window.location.href = `/apply-with-bosmond?opp=${encodeURIComponent(opp.id)}`}
                 style={{ background: "#2563eb", color: "#fff", border: "none", borderRadius: 6, padding: "10px 0", fontWeight: 600, fontSize: 16, cursor: "pointer" }}>
                 Apply with BOSMOND
               </button>
