@@ -2,6 +2,13 @@
 import { NextResponse } from "next/server";
 import fetch from "node-fetch";
 
+interface RFPItem {
+  id: string;
+  title: string;
+  status: string;
+  dueDate: string;
+}
+
 export async function GET() {
   // Replace with the actual API endpoint you find in DevTools
   const apiUrl = "https://hosting.portseattle.org/sops/api/solicitations";
@@ -9,14 +16,17 @@ export async function GET() {
   const data = await res.json();
 
   // Optionally, map/filter the data to only include fields you want
-  const rfps = data.map((item: any) => ({
-    id: item.id,
-    title: item.title,
-    status: item.status,
-    dueDate: item.dueDate,
-    link: `https://hosting.portseattle.org/sops/#/Solicitation/${item.id}`,
-    // ...add more fields as needed
-  }));
+  const rfps = data.map((item: unknown) => {
+    const rfp = item as RFPItem;
+    return {
+      id: rfp.id,
+      title: rfp.title,
+      status: rfp.status,
+      dueDate: rfp.dueDate,
+      link: `https://hosting.portseattle.org/sops/#/Solicitation/${rfp.id}`,
+      // ...add more fields as needed
+    };
+  });
 
   return NextResponse.json(rfps);
 }
