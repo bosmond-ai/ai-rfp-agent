@@ -4,7 +4,6 @@ import Image from "next/image";
 import { useUser } from "@auth0/nextjs-auth0";
 import { useRouter } from "next/navigation";
 import opportunities from "./opportunities-data";
-import { FaUserCircle, FaCog, FaSignOutAlt } from "react-icons/fa";
 
 const summaryCards = [
   { label: "Active Grants", value: 24 },

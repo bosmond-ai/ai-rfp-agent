@@ -1,6 +1,7 @@
 "use client";
 import { useState, useEffect, useRef } from "react";
 import { useUser } from "@auth0/nextjs-auth0";
+import Image from 'next/image';
 
 const ORG_TYPES = [
   "Nonprofit",
@@ -82,6 +83,7 @@ export default function UserProfileForm({ initialProfile }: UserProfileFormProps
   const [completed, setCompleted] = useState(false);
   const [unsaved, setUnsaved] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const [selectedOpp, setSelectedOpp] = useState<unknown>(null);
 
   // Load from localStorage on mount
   useEffect(() => {
@@ -175,7 +177,7 @@ export default function UserProfileForm({ initialProfile }: UserProfileFormProps
       <div style={{ maxWidth: 500, margin: "3rem auto", background: "#fff", borderRadius: 16, boxShadow: "0 2px 16px rgba(0,0,0,0.06)", padding: 40, textAlign: "center" }}>
         <h2>Welcome, {profile.name || user.name || user.email}!</h2>
         <div style={{ margin: "24px 0" }}>
-          <img src={profile.avatar || "/default-avatar.png"} alt="Profile" style={{ width: 96, height: 96, borderRadius: "50%", objectFit: "cover", marginBottom: 16 }} />
+          <Image src={profile.avatar || "/default-avatar.png"} alt="Profile" width={96} height={96} style={{ borderRadius: "50%", objectFit: "cover", marginBottom: 16 }} />
           <div style={{ fontSize: 18, color: "#2563eb", fontWeight: 600 }}>Your profile is set up.</div>
         </div>
         <div style={{ fontSize: 16, marginBottom: 24 }}>Start exploring grant opportunities tailored to your mission and interests!</div>
@@ -200,10 +202,12 @@ export default function UserProfileForm({ initialProfile }: UserProfileFormProps
               onChange={handleAvatarChange}
             />
             <div style={{ display: "inline-block", cursor: "pointer" }} onClick={() => fileInputRef.current?.click()}>
-              <img
+              <Image
                 src={profile.avatar || "/default-avatar.png"}
                 alt="Avatar"
-                style={{ width: 80, height: 80, borderRadius: "50%", objectFit: "cover", border: "2px solid #e0e7ef" }}
+                width={80}
+                height={80}
+                style={{ borderRadius: "50%", objectFit: "cover", border: "2px solid #e0e7ef" }}
               />
               <div style={{ fontSize: 13, color: "#2563eb", marginTop: 8 }}>Upload Logo/Avatar</div>
             </div>

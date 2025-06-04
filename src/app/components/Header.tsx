@@ -60,7 +60,7 @@ export default function Header() {
           <>
             <button onClick={() => setMenuOpen(v => !v)} style={{ background: 'none', border: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: 8 }}>
               {user.picture ? (
-                <img src={user.picture} alt="avatar" style={{ width: 32, height: 32, borderRadius: '50%', objectFit: 'cover' }} />
+                <Image src={user.picture} alt="avatar" width={32} height={32} style={{ borderRadius: '50%', objectFit: 'cover' }} />
               ) : (
                 <span style={{ fontSize: 32, color: '#2563eb' }}><FaUserCircle /></span>
               )}
@@ -69,7 +69,7 @@ export default function Header() {
             {menuOpen && (
               <div style={{ position: 'absolute', right: 0, top: 44, background: '#fff', border: '1px solid #e0e7ef', borderRadius: 8, boxShadow: '0 2px 8px rgba(0,0,0,0.08)', minWidth: 180, zIndex: 10 }}>
                 <Link href="/dashboard/profile" style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '12px 20px', color: '#183a4a', textDecoration: 'none', borderBottom: '1px solid #e0e7ef' }}><FaUserCircle /> Profile</Link>
-                <a href="/api/auth/logout" style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '12px 20px', color: '#e53e3e', textDecoration: 'none' }}><FaSignOutAlt /> Logout</a>
+                <Link href="/api/auth/logout" style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '12px 20px', color: '#e53e3e', textDecoration: 'none' }}><FaSignOutAlt /> Logout</Link>
               </div>
             )}
           </>

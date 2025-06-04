@@ -10,7 +10,7 @@ export async function GET() {
   const $ = cheerio.load(html);
 
   // Example: Adjust selectors to match the actual page structure
-  const grants: any[] = [];
+  const grants: unknown[] = [];
   $("table tbody tr").each((_, el) => {
     const tds = $(el).find("td");
     grants.push({
