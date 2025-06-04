@@ -70,16 +70,6 @@ const STATUS_COLORS: Record<string, string> = {
   "In Progress": "#2563eb",
 };
 
-interface Opportunity {
-  id: string;
-  title: string;
-  status: string;
-  amount: string;
-  audience: string;
-  sector: string;
-  activity: string;
-}
-
 type Activity = {
   type: 'bookmark' | 'apply';
   oppId: string;
