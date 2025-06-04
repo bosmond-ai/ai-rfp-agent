@@ -4,6 +4,7 @@ import Image from "next/image";
 import { useUser } from "@auth0/nextjs-auth0";
 import { useRouter } from "next/navigation";
 import opportunities from "./opportunities-data";
+import { FaUserCircle, FaCog, FaSignOutAlt } from "react-icons/fa";
 
 const summaryCards = [
   { label: "Active Grants", value: 24 },
@@ -142,27 +143,6 @@ export default function Dashboard() {
 
   return (
     <div className={theme === "dark" ? "dashboard dark" : "dashboard light"} style={{ minHeight: "100vh", background: theme === "dark" ? "#1a2327" : "#f7fafc" }}>
-      {/* Top Navigation Bar */}
-      <nav style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "1rem 2rem", background: theme === "dark" ? "#e6f4ea" : "#e6f4ea", borderBottom: "1px solid #e0e7ef" }}>
-        <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
-          <Image src="/bosmond-logo.png" alt="Bosmond Logo" width={48} height={48} />
-          <span style={{ fontWeight: 700, fontSize: 24, color: theme === "dark" ? "#183a4a" : "#183a4a" }}>BOSMOND</span>
-        </div>
-        <div style={{ position: "relative" }}>
-          <button onClick={() => setUserMenuOpen(v => !v)} style={{ background: "none", border: "none", cursor: "pointer", display: "flex", alignItems: "center", gap: 8 }}>
-            <span style={{ fontWeight: 600 }}>{user?.name || user?.email || "User"}</span>
-            <span style={{ fontSize: 20 }}>▼</span>
-          </button>
-          {userMenuOpen && (
-            <div style={{ position: "absolute", right: 0, top: 36, background: "#fff", border: "1px solid #e0e7ef", borderRadius: 8, boxShadow: "0 2px 8px rgba(0,0,0,0.08)", minWidth: 160, zIndex: 10 }}>
-              <a href="/dashboard/profile" style={{ display: "block", padding: "12px 20px", color: "#183a4a", textDecoration: "none", borderBottom: "1px solid #e0e7ef" }}>Profile</a>
-              <a href="/dashboard/settings" style={{ display: "block", padding: "12px 20px", color: "#183a4a", textDecoration: "none", borderBottom: "1px solid #e0e7ef" }}>Settings</a>
-              <a href="/api/auth/logout" style={{ display: "block", padding: "12px 20px", color: "#e53e3e", textDecoration: "none" }}>Logout</a>
-            </div>
-          )}
-        </div>
-      </nav>
-
       {/* Main Content */}
       <main style={{ maxWidth: 1200, margin: "2rem auto", padding: 24, display: "flex", gap: 32 }}>
         <div style={{ flex: 3 }}>

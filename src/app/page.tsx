@@ -19,15 +19,6 @@ interface Opportunity {
 export default function Home() {
   return (
     <div style={{ minHeight: "100vh", background: "#f7fafc", color: "#183a4a", fontFamily: 'Inter, sans-serif' }}>
-      {/* Top Nav */}
-      <nav style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "1.5rem 2rem", background: "#e6f4ea", borderBottom: "1px solid #e0e7ef" }}>
-        <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
-          <Image src="/bosmond-logo.png" alt="Bosmond Logo" width={48} height={48} />
-          <span style={{ fontWeight: 700, fontSize: 24 }}>BOSMOND</span>
-        </div>
-        <a href="/api/auth/login?returnTo=/dashboard" style={{ background: "#2563eb", color: "#fff", padding: "10px 28px", borderRadius: 8, fontWeight: 600, textDecoration: "none", fontSize: 18 }}>Login / Sign Up</a>
-      </nav>
-
       {/* Hero Section */}
       <section style={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", padding: "4rem 1rem 2rem 1rem", background: "#e6f4ea" }}>
         <h1 style={{ fontSize: 40, fontWeight: 800, marginBottom: 16, textAlign: "center" }}>
