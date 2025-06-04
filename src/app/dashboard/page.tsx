@@ -87,27 +87,15 @@ type Activity = {
 };
 
 export default function Dashboard() {
-  const [theme, setTheme] = useState("light");
   const [showModal, setShowModal] = useState(false);
   const [selectedOpp, setSelectedOpp] = useState<Opportunity | null>(null);
   const { user, isLoading } = useUser();
   const [profile, setProfile] = useState<UserProfile | null>(null);
   const [loadingProfile, setLoadingProfile] = useState(true);
-  const [userMenuOpen, setUserMenuOpen] = useState(false);
   const [search, setSearch] = useState("");
   const [filterStatus, setFilterStatus] = useState("");
-  const [recentActivity, setRecentActivity] = useState<Activity[]>([]);
+  const [recentActivity] = useState<Activity[]>([]);
   const router = useRouter();
-
-  const handleApply = (opp: Opportunity) => {
-    setSelectedOpp(opp);
-    setShowModal(true);
-  };
-
-  const closeModal = () => {
-    setShowModal(false);
-    setSelectedOpp(null);
-  };
 
   // Fetch user profile after login
   useEffect(() => {
@@ -128,11 +116,16 @@ export default function Dashboard() {
     return matchesSearch && matchesStatus;
   });
 
+  const handleApply = (opp: Opportunity) => {
+    setSelectedOpp(opp);
+    setShowModal(true);
+  };
+
   if (isLoading || loadingProfile) return <div>Loading...</div>;
   if (!profile) return <UserProfileForm initialProfile={null} onSave={() => window.location.reload()} />;
 
   return (
-    <div className={theme === "dark" ? "dashboard dark" : "dashboard light"} style={{ minHeight: "100vh", background: theme === "dark" ? "#1a2327" : "#f7fafc" }}>
+    <div className="dashboard light" style={{ minHeight: "100vh", background: "#f7fafc" }}>
       {/* Main Content */}
       <main style={{ maxWidth: 1200, margin: "2rem auto", padding: 24, display: "flex", gap: 32 }}>
         <div style={{ flex: 3 }}>
@@ -156,7 +149,7 @@ export default function Dashboard() {
             </select>
           </div>
           {/* Opportunities Table */}
-          <div style={{ background: theme === "dark" ? "#f7fafc" : "#fff", borderRadius: 12, boxShadow: "0 2px 16px rgba(0,0,0,0.04)", padding: 24 }}>
+          <div style={{ background: "#fff", borderRadius: 12, boxShadow: "0 2px 16px rgba(0,0,0,0.04)", padding: 24 }}>
             {filteredOpportunities.length === 0 ? (
               <div style={{ textAlign: "center", color: "#6b7280", padding: 40 }}>
                 <Image src="/empty-state.svg" alt="No opportunities" width={120} height={120} style={{ marginBottom: 16 }} />
@@ -166,7 +159,7 @@ export default function Dashboard() {
             ) : (
               <table style={{ width: "100%", borderCollapse: "collapse" }}>
                 <thead>
-                  <tr style={{ color: theme === "dark" ? "#183a4a" : "#183a4a" }}>
+                  <tr style={{ color: "#183a4a" }}>
                     <th style={{ textAlign: "left", padding: 8 }}>Title</th>
                     <th style={{ textAlign: "left", padding: 8 }}>Status</th>
                     <th style={{ textAlign: "left", padding: 8 }}>Amount</th>
@@ -201,7 +194,7 @@ export default function Dashboard() {
         </div>
         {/* Recent Activity Sidebar */}
         <div style={{ flex: 1, minWidth: 260 }}>
-          <div style={{ background: theme === "dark" ? "#f7fafc" : "#fff", borderRadius: 12, boxShadow: "0 2px 16px rgba(0,0,0,0.04)", padding: 20, marginBottom: 24 }}>
+          <div style={{ background: "#fff", borderRadius: 12, boxShadow: "0 2px 16px rgba(0,0,0,0.04)", padding: 20, marginBottom: 24 }}>
             <h4 style={{ marginBottom: 12, color: "#2563eb" }}>Recent Activity</h4>
             {recentActivity.length === 0 ? (
               <div style={{ color: "#6b7280" }}>No recent activity yet.</div>
@@ -225,25 +218,25 @@ export default function Dashboard() {
       {/* Apply Modal */}
       {showModal && selectedOpp && (
         <div style={{ position: "fixed", top: 0, left: 0, width: "100vw", height: "100vh", background: "rgba(0,0,0,0.4)", display: "flex", alignItems: "center", justifyContent: "center", zIndex: 1000 }}>
-          <div style={{ background: theme === "dark" ? "#22313a" : "#fff", borderRadius: 16, padding: 32, minWidth: 400, maxWidth: "90vw", boxShadow: "0 4px 32px rgba(0,0,0,0.12)", color: theme === "dark" ? "#b5e0c7" : "#183a4a" }}>
+          <div style={{ background: "#fff", borderRadius: 16, padding: 32, minWidth: 400, maxWidth: "90vw", boxShadow: "0 4px 32px rgba(0,0,0,0.12)", color: "#183a4a" }}>
             <h3 style={{ marginBottom: 12 }}>{selectedOpp.title}</h3>
             <p style={{ marginBottom: 16 }}>Grant Requirements: (placeholder for requirements and details)</p>
             <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
               <button onClick={() => alert("User will apply themselves")}
-                style={{ background: theme === "dark" ? "#2563eb" : "#3bb273", color: "#fff", border: "none", borderRadius: 6, padding: "10px 0", fontWeight: 600, fontSize: 16, cursor: "pointer" }}>
+                style={{ background: "#3bb273", color: "#fff", border: "none", borderRadius: 6, padding: "10px 0", fontWeight: 600, fontSize: 16, cursor: "pointer" }}>
                 Apply Myself
               </button>
               <button onClick={() => window.location.href = `/apply-with-bosmond?opp=${encodeURIComponent(selectedOpp.id)}`}
-                style={{ background: theme === "dark" ? "#3bb273" : "#2563eb", color: "#fff", border: "none", borderRadius: 6, padding: "10px 0", fontWeight: 600, fontSize: 16, cursor: "pointer" }}>
+                style={{ background: "#2563eb", color: "#fff", border: "none", borderRadius: 6, padding: "10px 0", fontWeight: 600, fontSize: 16, cursor: "pointer" }}>
                 Apply with BOSMOND
               </button>
-              <button onClick={closeModal} style={{ background: "none", color: theme === "dark" ? "#b5e0c7" : "#183a4a", border: "none", marginTop: 8, cursor: "pointer" }}>Cancel</button>
+              <button onClick={() => setShowModal(false)} style={{ background: "none", color: "#183a4a", border: "none", marginTop: 8, cursor: "pointer" }}>Cancel</button>
             </div>
           </div>
         </div>
       )}
       {/* Footer */}
-      <footer style={{ textAlign: "center", padding: 24, color: theme === "dark" ? "#b5e0c7" : "#6b7280", background: "none" }}>
+      <footer style={{ textAlign: "center", padding: 24, color: "#6b7280", background: "none" }}>
         <span>Contact | Privacy | Terms</span>
       </footer>
     </div>

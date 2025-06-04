@@ -2,6 +2,7 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { FaCamera } from 'react-icons/fa';
+import Image from 'next/image';
 
 const bannerUrl = "/profile-banner.jpg";
 const defaultAvatar = "/default-avatar.png";
@@ -56,10 +57,13 @@ export default function EditProfilePage() {
         {/* Avatar Upload */}
         <div style={{ position: 'absolute', left: 40, bottom: -60, zIndex: 2 }}>
           <label style={{ cursor: 'pointer', position: 'relative', display: 'inline-block' }}>
-            <img
+            <Image
               src={avatar || defaultAvatar}
-              alt="avatar"
-              style={{ width: 120, height: 120, borderRadius: '50%', objectFit: 'cover', border: '4px solid #fff', background: '#fff', boxShadow: '0 2px 8px rgba(0,0,0,0.08)' }}
+              alt="Profile avatar"
+              width={120}
+              height={120}
+              className="profile-avatar"
+              style={{ borderRadius: '50%', objectFit: 'cover', border: '4px solid #fff', background: '#fff', boxShadow: '0 2px 8px rgba(0,0,0,0.08)' }}
             />
             <span style={{ position: 'absolute', right: 8, bottom: 8, background: '#2563eb', color: '#fff', borderRadius: '50%', padding: 6, border: '2px solid #fff', fontSize: 16, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
               <FaCamera />

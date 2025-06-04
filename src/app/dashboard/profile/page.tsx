@@ -2,6 +2,7 @@
 import { useUser } from '@auth0/nextjs-auth0';
 import { useRouter } from 'next/navigation';
 import { FaEnvelope, FaMapMarkerAlt, FaEdit } from 'react-icons/fa';
+import Image from 'next/image';
 
 const bannerUrl = "/profile-banner.jpg"; // Use a default or user-uploaded banner
 
@@ -20,14 +21,22 @@ export default function ProfilePage() {
     <div style={{ maxWidth: 700, margin: '3rem auto', background: '#fff', borderRadius: 16, boxShadow: '0 2px 16px rgba(0,0,0,0.06)', overflow: 'hidden' }}>
       {/* Banner */}
       <div style={{ position: 'relative', height: 180, background: '#e6f4ea' }}>
-        <img src={bannerUrl} alt="banner" style={{ width: '100%', height: 180, objectFit: 'cover' }} />
+        <Image 
+          src={bannerUrl} 
+          alt="Profile banner" 
+          width={1200} 
+          height={180} 
+          className="profile-banner" 
+          style={{ objectFit: 'cover' }} 
+        />
         {/* Avatar */}
-        <img
+        <Image 
           src={user.picture || '/default-avatar.png'}
-          alt="avatar"
+          alt="Profile avatar"
+          width={120}
+          height={120}
+          className="profile-avatar"
           style={{
-            width: 120,
-            height: 120,
             borderRadius: '50%',
             objectFit: 'cover',
             border: '4px solid #fff',

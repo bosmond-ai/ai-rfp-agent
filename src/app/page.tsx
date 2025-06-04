@@ -1,20 +1,6 @@
 "use client";
-import { useState, useEffect } from "react";
-import Image from "next/image";
 
-interface Opportunity {
-  id: string;
-  title: string;
-  source: string;
-  status: string;
-  amount?: string | null;
-  link: string;
-  audience?: string | null;
-  sector?: string | null;
-  activity?: string | null;
-  openDate?: string | null;
-  closeDate?: string | null;
-}
+import Link from 'next/link';
 
 export default function Home() {
   return (
@@ -27,9 +13,9 @@ export default function Home() {
         <p style={{ fontSize: 22, maxWidth: 600, textAlign: "center", marginBottom: 32 }}>
           BOSMOND matches nonprofits and businesses with thousands of funding opportunities tailored to your goals.
         </p>
-        <a href="/api/auth/login?returnTo=/dashboard" style={{ background: "#3bb273", color: "#fff", padding: "16px 48px", borderRadius: 10, fontWeight: 700, fontSize: 20, textDecoration: "none", boxShadow: "0 2px 8px rgba(0,0,0,0.06)" }}>
+        <Link href="/api/auth/login?returnTo=/dashboard" style={{ background: "#3bb273", color: "#fff", padding: "16px 48px", borderRadius: 10, fontWeight: 700, fontSize: 20, textDecoration: "none", boxShadow: "0 2px 8px rgba(0,0,0,0.06)" }}>
           Get Started
-        </a>
+        </Link>
       </section>
 
       {/* Features Section */}
@@ -68,19 +54,19 @@ export default function Home() {
         <div style={{ display: "flex", justifyContent: "center", gap: 32 }}>
           <div style={{ background: "#fff", borderRadius: 12, padding: 28, maxWidth: 340, boxShadow: "0 2px 8px rgba(0,0,0,0.04)" }}>
             <p style={{ fontStyle: "italic", marginBottom: 12 }}>
-              "BOSMOND helped us find and win a grant that made a real difference for our food program."
+              &quot;BOSMOND helped us find and win a grant that made a real difference for our food program.&quot;
             </p>
             <div style={{ fontWeight: 600 }}>— Sarah, Nonprofit Director</div>
           </div>
           <div style={{ background: "#fff", borderRadius: 12, padding: 28, maxWidth: 340, boxShadow: "0 2px 8px rgba(0,0,0,0.04)" }}>
             <p style={{ fontStyle: "italic", marginBottom: 12 }}>
-              "The personalized dashboard is a game changer. We only see grants that matter to us."
+              &quot;The personalized dashboard is a game changer. We only see grants that matter to us.&quot;
             </p>
             <div style={{ fontWeight: 600 }}>— James, Community Leader</div>
           </div>
           <div style={{ background: "#fff", borderRadius: 12, padding: 28, maxWidth: 340, boxShadow: "0 2px 8px rgba(0,0,0,0.04)" }}>
             <p style={{ fontStyle: "italic", marginBottom: 12 }}>
-              "I love how easy it is to apply. BOSMOND's support team is fantastic!"
+              &quot;I love how easy it is to apply. BOSMOND&apos;s support team is fantastic!&quot;
             </p>
             <div style={{ fontWeight: 600 }}>— Priya, Small Business Owner</div>
           </div>
