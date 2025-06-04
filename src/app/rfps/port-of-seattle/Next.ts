@@ -15,8 +15,12 @@ export async function GET() {
   const res = await fetch(apiUrl);
   const data = await res.json();
 
+  if (!Array.isArray(data)) {
+    throw new Error("Expected data to be an array");
+  }
+
   // Optionally, map/filter the data to only include fields you want
-  const rfps = data.map((item: unknown) => {
+  const rfps = (data as unknown[]).map((item: unknown) => {
     const rfp = item as RFPItem;
     return {
       id: rfp.id,
