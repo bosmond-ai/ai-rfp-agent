@@ -83,7 +83,6 @@ export default function UserProfileForm({ initialProfile }: UserProfileFormProps
   const [completed, setCompleted] = useState(false);
   const [unsaved, setUnsaved] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
-  const [selectedOpp, setSelectedOpp] = useState<unknown>(null);
 
   // Load from localStorage on mount
   useEffect(() => {
@@ -125,7 +124,7 @@ export default function UserProfileForm({ initialProfile }: UserProfileFormProps
     return errs;
   };
 
-  const handleChange = (field: keyof UserProfile, value: any) => {
+  const handleChange = (field: keyof UserProfile, value: unknown) => {
     setProfile((p) => ({ ...p, [field]: value }));
   };
 

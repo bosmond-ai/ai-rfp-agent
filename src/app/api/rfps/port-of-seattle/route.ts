@@ -41,7 +41,7 @@ export async function GET() {
       };
     });
     return NextResponse.json(rfps);
-  } catch (e) {
+  } catch {
     return NextResponse.json({ error: "Response was not JSON", details: text.slice(0, 500) }, { status: 500 });
   }
 }

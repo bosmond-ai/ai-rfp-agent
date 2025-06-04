@@ -5,16 +5,10 @@ import { useUser } from "@auth0/nextjs-auth0";
 import { useRouter } from "next/navigation";
 import opportunities from "./opportunities-data";
 
-const summaryCards = [
-  { label: "Active Grants", value: 24 },
-  { label: "Applications in Progress", value: 3 },
-  { label: "Total Awarded", value: "$1,200,000" },
-];
-
 interface UserProfile {
   mission: string;
   tags: string[];
-  [key: string]: any;
+  [key: string]: unknown;
 }
 
 interface UserProfileFormProps {
@@ -76,23 +70,36 @@ const STATUS_COLORS: Record<string, string> = {
   "In Progress": "#2563eb",
 };
 
+interface Opportunity {
+  id: string;
+  title: string;
+  status: string;
+  amount: string;
+  audience: string;
+  sector: string;
+  activity: string;
+}
+
+type Activity = {
+  type: 'bookmark' | 'apply';
+  oppId: string;
+  time: string;
+};
+
 export default function Dashboard() {
   const [theme, setTheme] = useState("light");
   const [showModal, setShowModal] = useState(false);
-  const [selectedOpp, setSelectedOpp] = useState<any>(null);
+  const [selectedOpp, setSelectedOpp] = useState<Opportunity | null>(null);
   const { user, isLoading } = useUser();
   const [profile, setProfile] = useState<UserProfile | null>(null);
   const [loadingProfile, setLoadingProfile] = useState(true);
   const [userMenuOpen, setUserMenuOpen] = useState(false);
   const [search, setSearch] = useState("");
   const [filterStatus, setFilterStatus] = useState("");
-  const [bookmarked, setBookmarked] = useState<string[]>([]);
-  const [recentActivity, setRecentActivity] = useState<any[]>([]);
+  const [recentActivity, setRecentActivity] = useState<Activity[]>([]);
   const router = useRouter();
 
-  const toggleTheme = () => setTheme(theme === "light" ? "dark" : "light");
-
-  const handleApply = (opp: any) => {
+  const handleApply = (opp: Opportunity) => {
     setSelectedOpp(opp);
     setShowModal(true);
   };
@@ -120,22 +127,6 @@ export default function Dashboard() {
     const matchesStatus = filterStatus ? opp.status === filterStatus : true;
     return matchesSearch && matchesStatus;
   });
-
-  const handleBookmark = (id: string) => {
-    setBookmarked(bm => bm.includes(id) ? bm.filter(b => b !== id) : [...bm, id]);
-    setRecentActivity(ra => [
-      { type: "bookmark", oppId: id, time: new Date().toLocaleString() },
-      ...ra.slice(0, 9)
-    ]);
-  };
-
-  const handleApplyQuick = (opp: any) => {
-    setRecentActivity(ra => [
-      { type: "apply", oppId: opp.id, time: new Date().toLocaleString() },
-      ...ra.slice(0, 9)
-    ]);
-    handleApply(opp);
-  };
 
   if (isLoading || loadingProfile) return <div>Loading...</div>;
   if (!profile) return <UserProfileForm initialProfile={null} onSave={() => window.location.reload()} />;
