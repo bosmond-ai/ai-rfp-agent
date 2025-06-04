@@ -220,7 +220,7 @@ export default function Dashboard() {
                 style={{ background: "#3bb273", color: "#fff", border: "none", borderRadius: 6, padding: "10px 0", fontWeight: 600, fontSize: 16, cursor: "pointer" }}>
                 Apply Myself
               </button>
-              <button onClick={() => window.location.href = `/apply-with-bosmond?opp=${encodeURIComponent(opp.id)}`}
+              <button onClick={() => window.location.href = `/apply-with-bosmond`}
                 style={{ background: "#2563eb", color: "#fff", border: "none", borderRadius: 6, padding: "10px 0", fontWeight: 600, fontSize: 16, cursor: "pointer" }}>
                 Apply with BOSMOND
               </button>

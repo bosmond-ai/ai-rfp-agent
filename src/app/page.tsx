@@ -44,7 +44,7 @@ export default function Home() {
         <ol style={{ fontSize: 18, color: "#183a4a", lineHeight: 1.7, maxWidth: 700, margin: "0 auto" }}>
           <li style={{ marginBottom: 12 }}><b>Sign up</b> and tell us your mission and interests.</li>
           <li style={{ marginBottom: 12 }}><b>Get matched</b> with relevant grants and funding opportunities.</li>
-          <li><b>Apply</b> with confidence—on your own or with BOSMOND's help.</li>
+          <li><b>Apply</b> with confidence—on your own or with BOSMOND&apos;s help.</li>
         </ol>
       </section>
 
