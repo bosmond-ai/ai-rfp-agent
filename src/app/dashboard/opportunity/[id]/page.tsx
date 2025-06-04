@@ -1,13 +1,7 @@
 import { notFound } from "next/navigation";
 import opportunities from "../../opportunities-data"; // You may want to load this from a real source or API
 
-type Props = {
-  params: {
-    id: string;
-  };
-};
-
-export default function Page({ params }: Props) {
+export default function Page({ params }: { params: { id: string } }) {
   // For now, use a static list or fetch from API
   const opportunity = opportunities.find((opp) => opp.id === params.id);
   if (!opportunity) return notFound();
