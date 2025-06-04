@@ -116,11 +116,6 @@ export default function Dashboard() {
     return matchesSearch && matchesStatus;
   });
 
-  const handleApply = (opp: Opportunity) => {
-    setSelectedOpp(opp);
-    setShowModal(true);
-  };
-
   if (isLoading || loadingProfile) return <div>Loading...</div>;
   if (!profile) return <UserProfileForm initialProfile={null} onSave={() => window.location.reload()} />;
 
