@@ -34,7 +34,7 @@ export default function About() {
           As <b>nonprofit leaders</b>, we deeply understand how hard it is to find the right resources, apply for grants, and keep your mission alive. As <b>small business owners</b>, we know the struggle of navigating complex government bids and contracts. As <b>local city agency staff</b>, we have seen how difficult it can be to access federal funds to support our communities.
         </p>
         <p style={{ fontSize: 18, marginBottom: 18 }}>
-          We were all once in your shoes. That's why we created this platform: to fix these issues, fill the gaps, and build a bridge between those who need support and the opportunities that exist.
+          We were all once in your shoes. That&apos;s why we created this platform: to fix these issues, fill the gaps, and build a bridge between those who need support and the opportunities that exist.
         </p>
         <div style={{ borderTop: '1px solid #e0e7ef', margin: '32px 0' }} />
         <div style={{ background: '#e6f4ea', borderRadius: 12, padding: 24, marginBottom: 32, textAlign: 'center', boxShadow: '0 2px 8px rgba(59,178,115,0.06)' }}>
