@@ -3,31 +3,42 @@ import { prisma } from '@/lib/prisma';
 import type { NextApiRequest, NextApiResponse } from 'next';
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
-  const session = await getSession(req, res);
-  if (!session?.user) return res.status(401).json({ error: "Unauthorized" });
+  try {
+    const session = await getSession(req, res);
+    console.log("Session:", session);
+    if (!session?.user) {
+      console.log("No user session found");
+      return res.status(401).json({ error: "Unauthorized" });
+    }
 
-  if (req.method === "POST") {
-    const { mission, tags } = req.body;
-    await prisma.user.upsert({
-      where: { id: session.user.sub },
-      update: { mission, tags },
-      create: {
-        id: session.user.sub,
-        email: session.user.email,
-        name: session.user.name,
-        mission,
-        tags,
-      },
-    });
-    return res.status(200).json({ success: true });
+    if (req.method === "POST") {
+      const { mission, tags } = req.body;
+      console.log("POST body:", req.body);
+      await prisma.user.upsert({
+        where: { id: session.user.sub },
+        update: { mission, tags },
+        create: {
+          id: session.user.sub,
+          email: session.user.email,
+          name: session.user.name,
+          mission,
+          tags,
+        },
+      });
+      return res.status(200).json({ success: true });
+    }
+
+    if (req.method === "GET") {
+      const user = await prisma.user.findUnique({
+        where: { id: session.user.sub },
+      });
+      console.log("Fetched user:", user);
+      return res.status(200).json(user);
+    }
+
+    res.status(405).end();
+  } catch (error) {
+    console.error("Error in /api/profile:", error);
+    res.status(500).json({ error: "Internal Server Error", details: error instanceof Error ? error.message : error });
   }
-
-  if (req.method === "GET") {
-    const user = await prisma.user.findUnique({
-      where: { id: session.user.sub },
-    });
-    return res.status(200).json(user);
-  }
-
-  res.status(405).end();
 }
