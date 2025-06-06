@@ -36,6 +36,18 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       return res.status(200).json(user);
     }
 
+    // Test DB connectivity if ?testDb=1 is present
+    if (req.method === 'GET' && req.query.testDb === '1') {
+      try {
+        // Try a simple query (list users, or count)
+        const count = await prisma.user.count();
+        return res.status(200).json({ db: 'ok', userCount: count });
+      } catch (dbErr) {
+        console.error('DB test error:', dbErr);
+        return res.status(500).json({ db: 'error', details: dbErr instanceof Error ? dbErr.message : dbErr });
+      }
+    }
+
     res.status(405).end();
   } catch (error) {
     console.error("Error in /api/profile:", error);
