@@ -26,7 +26,7 @@ interface Grant {
   cfdaList?: { cfdaNumber: string }[];
   openDate?: string;
   closeDate?: string;
-  [key: string]: any;
+  [key: string]: unknown;
 }
 
 export default function FederalGrantsPage() {
@@ -167,13 +167,13 @@ export default function FederalGrantsPage() {
         <div style={{ display: 'flex', justifyContent: 'center', gap: 32, flexWrap: 'wrap' }}>
           <div style={{ background: '#fff', borderRadius: 12, padding: 28, maxWidth: 340, boxShadow: '0 2px 8px rgba(0,0,0,0.04)' }}>
             <p style={{ fontStyle: 'italic', marginBottom: 12 }}>
-              "Bosmond made it so easy to find grants that fit our mission. The matching is spot on!"
+              &quot;Bosmond made it so easy to find grants that fit our mission. The matching is spot on!&quot;
             </p>
             <div style={{ fontWeight: 600, color: '#3bb273' }}>— Nonprofit Leader</div>
           </div>
           <div style={{ background: '#fff', borderRadius: 12, padding: 28, maxWidth: 340, boxShadow: '0 2px 8px rgba(0,0,0,0.04)' }}>
             <p style={{ fontStyle: 'italic', marginBottom: 12 }}>
-              "We never knew about half these opportunities before. Bosmond is a game changer."
+              &quot;We never knew about half these opportunities before. Bosmond is a game changer.&quot;
             </p>
             <div style={{ fontWeight: 600, color: '#2563eb' }}>— Small Business Owner</div>
           </div>
