@@ -30,8 +30,8 @@ export default function LoginPage() {
       if (!res.ok) throw new Error(data.error || "Login failed");
       // On success, redirect to dashboard
       router.push("/dashboard");
-    } catch (err: any) {
-      setError(err.message || "Login failed");
+    } catch (err: unknown) {
+      setError(err instanceof Error ? err.message : "Login failed");
     } finally {
       setLoading(false);
     }
@@ -80,7 +80,7 @@ export default function LoginPage() {
         </form>
         {error && <Typography sx={{ color: "#e53e3e", mt: 1, textAlign: "center" }}>{error}</Typography>}
         <Typography sx={{ textAlign: "center", mt: 2 }}>
-          <Link href="/signup" style={{ color: "#5a6acb", fontWeight: 600, textDecoration: "none" }}>Don't have an account? Sign up</Link>
+          <Link href="/signup" style={{ color: "#5a6acb", fontWeight: 600, textDecoration: "none" }}>Don&apos;t have an account? Sign up</Link>
         </Typography>
       </Box>
     </Box>

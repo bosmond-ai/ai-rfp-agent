@@ -1,7 +1,5 @@
 "use client";
 
-import Link from 'next/link';
-
 export default function Home() {
   return (
     <div style={{ minHeight: "100vh", background: "#f7fafc", color: "#183a4a", fontFamily: 'Inter, sans-serif' }}>
