@@ -5,7 +5,7 @@ import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
-import Grid2 from "@mui/material/Grid2";
+import Grid from "@mui/material/Grid";
 
 interface Org {
   name?: string;
