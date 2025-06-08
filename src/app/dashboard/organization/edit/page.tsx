@@ -5,7 +5,7 @@ import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
-import Grid from "@mui/material/Grid";
+import Grid2 from "@mui/material/Unstable_Grid2";
 
 interface Org {
   name?: string;
@@ -106,9 +106,9 @@ export default function EditOrganizationPage() {
     <Box sx={{ maxWidth: 700, mx: "auto", my: 6, bgcolor: "#fff", borderRadius: 3, boxShadow: 2, p: 4 }}>
       <Typography variant="h4" sx={{ mb: 2, color: "#2563eb", fontWeight: 800 }}>Edit Organization Profile</Typography>
       <form onSubmit={handleSubmit}>
-        <Grid container spacing={2}>
+        <Grid2 container spacing={2}>
           {ORG_FIELDS.map(field => (
-            <Grid item xs={12} sm={field.multiline ? 12 : 6} key={field.name}>
+            <Grid2 xs={12} sm={field.multiline ? 12 : 6} key={field.name}>
               <TextField
                 label={field.label}
                 value={org[field.name] || ""}
@@ -119,9 +119,9 @@ export default function EditOrganizationPage() {
                 minRows={field.multiline ? 3 : undefined}
                 type={field.type || "text"}
               />
-            </Grid>
+            </Grid2>
           ))}
-        </Grid>
+        </Grid2>
         {error && <Typography sx={{ color: "#e53e3e", mt: 2 }}>{error}</Typography>}
         {success && <Typography sx={{ color: "#3bb273", mt: 2 }}>Profile saved!</Typography>}
         <Button type="submit" variant="contained" color="primary" sx={{ mt: 3, fontWeight: 700 }} disabled={saving}>
