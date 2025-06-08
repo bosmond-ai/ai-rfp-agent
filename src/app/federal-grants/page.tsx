@@ -15,10 +15,24 @@ const LOCAL_KEYWORDS = [
   'Pacific Northwest', 'Spokane', 'Everett', 'Bellevue', 'Thurston County', 'Snohomish County'
 ];
 
+interface Grant {
+  id?: string;
+  opportunityId?: string;
+  title?: string;
+  opportunityTitle?: string;
+  synopsis?: string;
+  eligibility?: string;
+  agencyName?: string;
+  cfdaList?: { cfdaNumber: string }[];
+  openDate?: string;
+  closeDate?: string;
+  [key: string]: any;
+}
+
 export default function FederalGrantsPage() {
   const [tab, setTab] = useState('25'); // Default to Nonprofit
   const [keyword, setKeyword] = useState('');
-  const [grants, setGrants] = useState<any[]>([]);
+  const [grants, setGrants] = useState<Grant[]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const [selected, setSelected] = useState<string | null>(null);
@@ -38,8 +52,8 @@ export default function FederalGrantsPage() {
         const data = await res.json();
         setGrants(data.grants);
         setHitCount(data.hitCount);
-      } catch (e: any) {
-        setError(e.message || 'Error fetching grants');
+      } catch (e: unknown) {
+        setError(e instanceof Error ? e.message : 'Error fetching grants');
       } finally {
         setLoading(false);
       }
@@ -106,13 +120,13 @@ export default function FederalGrantsPage() {
           {!loading && !error && grants.length === 0 && (
             <div className="text-gray-500 italic">No grants to display yet.</div>
           )}
-          {grants.map((grant: any) => {
+          {grants.map((grant: Grant) => {
             const text = `${grant.title || grant.opportunityTitle} ${grant.synopsis || ''} ${grant.eligibility || ''}`.toLowerCase();
             const isLocal = LOCAL_KEYWORDS.some(k => text.includes(k.toLowerCase()));
             return (
               <div
                 key={grant.id || grant.opportunityId}
-                onClick={() => setSelected(grant.id || grant.opportunityId)}
+                onClick={() => setSelected(grant.id || grant.opportunityId || null)}
                 style={{
                   background: selected === (grant.id || grant.opportunityId) ? '#e6f4ea' : isLocal ? '#e0f7fa' : '#f7fafc',
                   border: selected === (grant.id || grant.opportunityId) ? '2px solid #2563eb' : isLocal ? '2px solid #3bb273' : '1px solid #e0e7ef',
@@ -131,7 +145,7 @@ export default function FederalGrantsPage() {
                 <div style={{ flex: 1 }}>
                   <div style={{ fontWeight: 700, fontSize: 20, color: '#2563eb' }}>{grant.title || grant.opportunityTitle}</div>
                   <div style={{ color: '#183a4a', fontSize: 16, margin: '6px 0' }}>{grant.agencyName}</div>
-                  <div style={{ color: '#64748b', fontSize: 15 }}>CFDA: {grant.cfdaList?.map((c: any) => c.cfdaNumber).join(', ') || 'N/A'}</div>
+                  <div style={{ color: '#64748b', fontSize: 15 }}>CFDA: {grant.cfdaList?.map((c: { cfdaNumber: string }) => c.cfdaNumber).join(', ') || 'N/A'}</div>
                   <div style={{ color: '#64748b', fontSize: 15 }}>Open: {grant.openDate || grant.openDate?.split('T')[0]} | Close: {grant.closeDate || grant.closeDate?.split('T')[0]}</div>
                 </div>
                 <SaveGrantButton grant={grant} />
@@ -170,7 +184,7 @@ export default function FederalGrantsPage() {
   );
 }
 
-function SaveGrantButton({ grant }: { grant: any }) {
+function SaveGrantButton({ grant }: { grant: Grant }) {
   const { user } = useUser();
   const [saving, setSaving] = useState(false);
   const [saved, setSaved] = useState(false);
@@ -196,8 +210,8 @@ function SaveGrantButton({ grant }: { grant: any }) {
       });
       if (!res.ok) throw new Error('Failed to save grant');
       setSaved(true);
-    } catch (e: any) {
-      setError(e.message || 'Error saving grant');
+    } catch (e: unknown) {
+      setError(e instanceof Error ? e.message : 'Error saving grant');
     } finally {
       setSaving(false);
     }

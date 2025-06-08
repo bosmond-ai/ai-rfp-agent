@@ -7,7 +7,7 @@ import Typography from "@mui/material/Typography";
 import { useUser } from '@auth0/nextjs-auth0';
 
 export default function SettingsPage() {
-  const { user, isLoading } = useUser();
+  const { user } = useUser();
   const [form, setForm] = useState({ name: "", email: "", address: "", phone: "", title: "" });
   const [saving, setSaving] = useState(false);
   const [success, setSuccess] = useState(false);
@@ -55,8 +55,8 @@ export default function SettingsPage() {
       });
       if (!res.ok) throw new Error("Failed to save settings");
       setSuccess(true);
-    } catch (err: any) {
-      setError(err.message || "Error saving settings");
+    } catch (err: unknown) {
+      setError(err instanceof Error ? err.message : "Error saving settings");
     } finally {
       setSaving(false);
     }
@@ -72,8 +72,8 @@ export default function SettingsPage() {
       });
       if (!res.ok) throw new Error("Failed to send password reset email");
       setPwStatus({ success: "Password reset email sent!" });
-    } catch (e: any) {
-      setPwStatus({ error: e.message || "Failed to send password reset email" });
+    } catch (e: unknown) {
+      setPwStatus({ error: e instanceof Error ? e.message : "Failed to send password reset email" });
     }
   };
 
@@ -107,7 +107,7 @@ export default function SettingsPage() {
         )}
         {isSocialUser && (
           <Typography sx={{ color: "#6b7280", mt: 2 }}>
-            You signed in with a social provider (Google, Facebook, etc). To change your password, please visit your provider's account settings.
+            You signed in with a social provider (Google, Facebook, etc). To change your password, please visit your provider&apos;s account settings.
           </Typography>
         )}
       </Box>
