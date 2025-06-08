@@ -7,6 +7,31 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Grid";
 
+interface Org {
+  name?: string;
+  website?: string;
+  email?: string;
+  phone?: string;
+  address?: string;
+  city?: string;
+  state?: string;
+  zip?: string;
+  country?: string;
+  ein?: string;
+  description?: string;
+  mission?: string;
+  foundedYear?: number;
+  orgType?: string;
+  size?: string;
+  linkedinUrl?: string;
+  logoUrl?: string;
+  boardMembers?: string;
+  keyPeople?: string;
+  financials?: string;
+  tags?: string;
+  [key: string]: unknown;
+}
+
 const ORG_FIELDS = [
   { name: "name", label: "Organization Name", required: true },
   { name: "website", label: "Website", required: true },
@@ -33,7 +58,7 @@ const ORG_FIELDS = [
 
 export default function EditOrganizationPage() {
   const router = useRouter();
-  const [org, setOrg] = useState<any>({});
+  const [org, setOrg] = useState<Org>({});
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState("");
@@ -50,8 +75,8 @@ export default function EditOrganizationPage() {
       .catch(() => setLoading(false));
   }, []);
 
-  const handleChange = (field: string, value: any) => {
-    setOrg((prev: any) => ({ ...prev, [field]: value }));
+  const handleChange = (field: string, value: unknown) => {
+    setOrg((prev: Org) => ({ ...prev, [field]: value }));
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -68,8 +93,8 @@ export default function EditOrganizationPage() {
       if (!res.ok) throw new Error("Failed to save organization profile");
       setSuccess(true);
       setTimeout(() => router.push("/dashboard/profile"), 1200);
-    } catch (e: any) {
-      setError(e.message || "Error saving profile");
+    } catch (e: unknown) {
+      setError(e instanceof Error ? e.message : "Error saving profile");
     } finally {
       setSaving(false);
     }

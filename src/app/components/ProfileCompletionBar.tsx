@@ -19,7 +19,7 @@ interface Org {
   ein?: string;
   description?: string;
   // add any other fields you use
-  [key: string]: any;
+  [key: string]: unknown;
 }
 
 function getCompletion(org: Org) {
