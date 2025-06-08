@@ -11,7 +11,6 @@ export default function Home() {
         <p style={{ fontSize: 22, maxWidth: 600, textAlign: "center", marginBottom: 32 }}>
           BOSMOND matches nonprofits and businesses with thousands of funding opportunities tailored to your goals.
         </p>
-        <a href="/login" style={{ background: "#2563eb", color: "#fff", padding: "10px 28px", borderRadius: 8, fontWeight: 600, textDecoration: "none", fontSize: 18 }}>Login / Sign Up</a>
         <a href="/login" style={{ background: "#3bb273", color: "#fff", padding: "16px 48px", borderRadius: 10, fontWeight: 700, fontSize: 20, textDecoration: "none", boxShadow: "0 2px 8px rgba(0,0,0,0.06)" }}>
           Get Started
         </a>
