@@ -10,14 +10,14 @@ const REQUIRED_FIELDS = [
 ];
 
 interface Org {
-  name?: string;
-  website?: string;
-  email?: string;
-  address?: string;
-  orgType?: string;
-  mission?: string;
-  ein?: string;
-  description?: string;
+  name?: string | null;
+  website?: string | null;
+  email?: string | null;
+  address?: string | null;
+  orgType?: string | null;
+  mission?: string | null;
+  ein?: string | null;
+  description?: string | null;
   // add any other fields you use
   [key: string]: unknown;
 }
