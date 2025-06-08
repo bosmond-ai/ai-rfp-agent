@@ -21,7 +21,7 @@ export async function GET(req: NextRequest) {
   }
 
   // Build the POST body for Grants.gov API (v1)
-  const body: any = {
+  const body: unknown = {
     startRecordNum,
     rows,
     sortBy: '',

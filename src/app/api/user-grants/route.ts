@@ -1,5 +1,4 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { getSession } from '@auth0/nextjs-auth0';
 import { prisma } from '@/lib/prisma';
 
 const GRANTS_API_URL = 'https://api.grants.gov/v1/api/fetchOpportunity';
@@ -32,7 +31,7 @@ export async function POST(req: NextRequest) {
     agency = details.agencyName || '';
     openDate = details.openDate ? new Date(details.openDate) : null;
     closeDate = details.closeDate ? new Date(details.closeDate) : null;
-  } catch (e) {
+  } catch {
     return NextResponse.json({ error: 'Failed to fetch grant details' }, { status: 500 });
   }
 
@@ -50,7 +49,7 @@ export async function POST(req: NextRequest) {
       },
     });
     return NextResponse.json({ success: true });
-  } catch (e) {
+  } catch {
     return NextResponse.json({ error: 'Failed to save grant' }, { status: 500 });
   }
 } 

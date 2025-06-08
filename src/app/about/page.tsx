@@ -43,7 +43,7 @@ export default function About() {
           </span>
           <br />
           <span style={{ fontSize: 20, color: '#2563eb', fontWeight: 600 }}>
-            Bosmond's mission is to level the playing field for small businesses and nonprofits by using AI to make applying for grants and RFPs as easy and effective as it is for large organizations with dedicated proposal teams.
+            Bosmond&apos;s mission is to level the playing field for small businesses and nonprofits by using AI to make applying for grants and RFPs as easy and effective as it is for large organizations with dedicated proposal teams.
           </span>
           <br />
           <span style={{ fontSize: 17, color: '#183a4a', fontWeight: 400 }}>
