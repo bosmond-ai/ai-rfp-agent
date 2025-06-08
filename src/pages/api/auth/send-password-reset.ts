@@ -38,7 +38,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       throw new Error(err);
     }
     return res.status(200).json({ success: true });
-  } catch (e: any) {
-    return res.status(500).json({ error: e.message || 'Failed to send reset email' });
+  } catch (e: unknown) {
+    return res.status(500).json({ error: e instanceof Error ? e.message : 'Failed to send reset email' });
   }
 } 

@@ -27,8 +27,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     // Optionally, set a session cookie here (for now, just return success)
     // In production, use secure cookies and proper session management
     return res.status(200).json({ success: true, access_token: tokenData.access_token, id_token: tokenData.id_token });
-  } catch (e: any) {
+  } catch (e: unknown) {
     console.error(e);
-    return res.status(500).json({ error: e.message || 'Login failed' });
+    return res.status(500).json({ error: e instanceof Error ? e.message : 'Login failed' });
   }
 } 

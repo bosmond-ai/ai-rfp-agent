@@ -43,8 +43,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     const createData = await createRes.json();
     if (!createRes.ok) throw new Error(createData.message || 'Signup failed');
     return res.status(200).json({ success: true });
-  } catch (e: any) {
+  } catch (e: unknown) {
     console.error(e);
-    return res.status(500).json({ error: e.message || 'Signup failed' });
+    return res.status(500).json({ error: e instanceof Error ? e.message : 'Signup failed' });
   }
 } 
