@@ -4,6 +4,7 @@ import { useRouter } from 'next/navigation';
 import { FaEnvelope, FaMapMarkerAlt, FaEdit } from 'react-icons/fa';
 import Image from 'next/image';
 import ProfileCompletionBar from '../../components/ProfileCompletionBar';
+import type { Org } from '../../components/ProfileCompletionBar';
 
 const bannerUrl = "/profile-banner.jpg"; // Use a default or user-uploaded banner
 
@@ -22,7 +23,7 @@ export default function ProfilePage() {
     <div style={{ maxWidth: 700, margin: '3rem auto', background: '#fff', borderRadius: 16, boxShadow: '0 2px 16px rgba(0,0,0,0.06)', overflow: 'hidden' }}>
       {/* Profile Completion Bar */}
       <div style={{ padding: '32px 40px 0 40px' }}>
-        <ProfileCompletionBar org={user} onEdit={() => router.push('/dashboard/profile/edit')} />
+        <ProfileCompletionBar org={user as Org} onEdit={() => router.push('/dashboard/profile/edit')} />
       </div>
       {/* Banner */}
       <div style={{ position: 'relative', height: 180, background: '#e6f4ea' }}>

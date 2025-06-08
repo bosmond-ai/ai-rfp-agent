@@ -9,7 +9,7 @@ const REQUIRED_FIELDS = [
   'name', 'website', 'email', 'address', 'orgType', 'mission', 'ein', 'description'
 ];
 
-interface Org {
+export interface Org {
   name?: string | null;
   website?: string | null;
   email?: string | null;
