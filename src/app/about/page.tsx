@@ -43,11 +43,11 @@ export default function About() {
           </span>
           <br />
           <span style={{ fontSize: 20, color: '#2563eb', fontWeight: 600 }}>
-            Help small nonprofits, businesses, and local agencies get what they are looking for.
+            Bosmond's mission is to level the playing field for small businesses and nonprofits by using AI to make applying for grants and RFPs as easy and effective as it is for large organizations with dedicated proposal teams.
           </span>
           <br />
           <span style={{ fontSize: 17, color: '#183a4a', fontWeight: 400 }}>
-            We believe in empowering those who serve our communities, and we are committed to making the process of finding and securing funding easier, more transparent, and more accessible for everyone.
+            We empower local organizations to discover, understand, and win funding opportunities—no matter their size or resources. Our platform uses advanced technology to guide users through the application process, suggest answers, and help draft proposals, so every organization can compete for funding on equal footing.
           </span>
         </div>
         <p style={{ fontSize: 18, marginBottom: 18 }}>

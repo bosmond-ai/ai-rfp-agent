@@ -13,9 +13,17 @@ export default function Home() {
         <p style={{ fontSize: 22, maxWidth: 600, textAlign: "center", marginBottom: 32 }}>
           BOSMOND matches nonprofits and businesses with thousands of funding opportunities tailored to your goals.
         </p>
-        <Link href="/api/auth/login?returnTo=/dashboard" style={{ background: "#3bb273", color: "#fff", padding: "16px 48px", borderRadius: 10, fontWeight: 700, fontSize: 20, textDecoration: "none", boxShadow: "0 2px 8px rgba(0,0,0,0.06)" }}>
+        <a href="/login" style={{ background: "#2563eb", color: "#fff", padding: "10px 28px", borderRadius: 8, fontWeight: 600, textDecoration: "none", fontSize: 18 }}>Login / Sign Up</a>
+        <a href="/login" style={{ background: "#3bb273", color: "#fff", padding: "16px 48px", borderRadius: 10, fontWeight: 700, fontSize: 20, textDecoration: "none", boxShadow: "0 2px 8px rgba(0,0,0,0.06)" }}>
           Get Started
-        </Link>
+        </a>
+      </section>
+      {/* Mission Statement Section */}
+      <section style={{ background: 'linear-gradient(90deg, #2563eb 0%, #3bb273 100%)', borderRadius: 16, margin: '32px auto', maxWidth: 900, padding: '32px 24px', boxShadow: '0 2px 16px rgba(37,99,235,0.08)', textAlign: 'center' }}>
+        <h2 style={{ color: '#fff', fontSize: 28, fontWeight: 800, marginBottom: 12, letterSpacing: 1 }}>Our Mission</h2>
+        <p style={{ color: '#e6f4ea', fontSize: 20, fontWeight: 500, marginBottom: 0 }}>
+          Bosmond empowers small businesses and nonprofits to compete for grants and RFPs on equal footing with large organizations. Our AI-driven platform guides you through every step of the application process—helping you discover, understand, and win funding opportunities with confidence, clarity, and ease.
+        </p>
       </section>
 
       {/* Features Section */}

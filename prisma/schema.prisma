@@ -8,10 +8,63 @@ datasource db {
 }
 
 model User {
-  id       String   @id
-  email    String
-  name     String?
-  mission  String?
-  tags     Json?
-  createdAt DateTime @default(now())
+  id             String   @id
+  email          String
+  name           String?
+  mission        String?
+  tags           Json?
+  createdAt      DateTime @default(now())
+  organizationId String?  // Link to Organization
+  address        String?
+  phone          String?
+  title          String?
+}
+
+model UserGrant {
+  id        String   @id @default(uuid())
+  userId    String   // Just a string, no @relation
+  grantId   String
+  title     String
+  agency    String
+  openDate  DateTime?
+  closeDate DateTime?
+  details   Json
+  savedAt   DateTime @default(now())
+}
+
+model Organization {
+  id            String   @id @default(uuid())
+  name          String
+  website       String?
+  email         String?
+  phone         String?
+  address       String?
+  city          String?
+  state         String?
+  zip           String?
+  country       String?
+  ein           String?
+  description   String?
+  mission       String?
+  foundedYear   Int?
+  orgType       String?
+  size          String?
+  linkedinUrl   String?
+  logoUrl       String?
+  boardMembers  Json?
+  keyPeople     Json?
+  financials    Json?
+  tags          Json?
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+}
+
+model Invite {
+  id         String   @id @default(uuid())
+  orgId      String
+  email      String
+  code       String   @unique
+  role       String   // 'admin' or 'member'
+  expiresAt  DateTime
+  acceptedAt DateTime?
 }

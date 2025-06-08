@@ -4,6 +4,7 @@ import Image from "next/image";
 import { useUser } from "@auth0/nextjs-auth0";
 import { useRouter } from "next/navigation";
 import opportunities from "./opportunities-data";
+import ProfileCompletionBar from '../components/ProfileCompletionBar';
 
 interface UserProfile {
   mission: string;
@@ -110,6 +111,10 @@ export default function Dashboard() {
 
   return (
     <div className="dashboard light" style={{ minHeight: "100vh", background: "#f7fafc" }}>
+      {/* Profile Completion Bar */}
+      <div style={{ maxWidth: 1200, margin: '0 auto', paddingTop: 32 }}>
+        <ProfileCompletionBar org={profile} onEdit={() => router.push('/dashboard/profile/edit')} />
+      </div>
       {/* Main Content */}
       <main style={{ maxWidth: 1200, margin: "2rem auto", padding: 24, display: "flex", gap: 32 }}>
         <div style={{ flex: 3 }}>

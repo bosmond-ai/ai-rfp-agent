@@ -12,17 +12,20 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     }
 
     if (req.method === "POST") {
-      const { mission, tags } = req.body;
+      const { mission, tags, name, email, address, phone, title } = req.body;
       console.log("POST body:", req.body);
       await prisma.user.upsert({
         where: { id: session.user.sub },
-        update: { mission, tags },
+        update: { mission, tags, name, email, address, phone, title },
         create: {
           id: session.user.sub,
-          email: session.user.email,
-          name: session.user.name,
+          email: email || session.user.email,
+          name: name || session.user.name,
           mission,
           tags,
+          address,
+          phone,
+          title,
         },
       });
       return res.status(200).json({ success: true });
@@ -31,6 +34,16 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     if (req.method === "GET") {
       const user = await prisma.user.findUnique({
         where: { id: session.user.sub },
+        select: {
+          id: true,
+          email: true,
+          name: true,
+          mission: true,
+          tags: true,
+          address: true,
+          phone: true,
+          title: true,
+        },
       });
       console.log("Fetched user:", user);
       return res.status(200).json(user);
