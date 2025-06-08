@@ -8,16 +8,26 @@ import Button from '@mui/material/Button';
 const REQUIRED_FIELDS = [
   'name', 'website', 'email', 'address', 'orgType', 'mission', 'ein', 'description'
 ];
-const RECOMMENDED_FIELDS = [
-  'boardMembers', 'keyPeople', 'financials', 'logoUrl', 'tags'
-];
 
-function getCompletion(org: any) {
+interface Org {
+  name?: string;
+  website?: string;
+  email?: string;
+  address?: string;
+  orgType?: string;
+  mission?: string;
+  ein?: string;
+  description?: string;
+  // add any other fields you use
+  [key: string]: any;
+}
+
+function getCompletion(org: Org) {
   let filled = 0;
-  let total = REQUIRED_FIELDS.length;
+  const total = REQUIRED_FIELDS.length;
   const missing: string[] = [];
   for (const field of REQUIRED_FIELDS) {
-    if (org?.[field]) filled++;
+    if (org[field]) filled++;
     else missing.push(field);
   }
   return { percent: Math.round((filled / total) * 100), missing };
@@ -39,7 +49,7 @@ const FIELD_LABELS: Record<string, string> = {
   tags: 'Tags',
 };
 
-export default function ProfileCompletionBar({ org, onEdit }: { org: any, onEdit?: () => void }) {
+export default function ProfileCompletionBar({ org, onEdit }: { org: Org, onEdit?: () => void }) {
   const { percent, missing } = getCompletion(org);
   return (
     <Box sx={{ mb: 4, p: 3, bgcolor: '#f7fafc', borderRadius: 2, boxShadow: 1 }}>

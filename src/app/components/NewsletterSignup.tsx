@@ -27,8 +27,8 @@ export default function NewsletterSignup() {
       if (!res.ok) throw new Error('Failed to sign up');
       setSuccess(true);
       setEmail('');
-    } catch (e: any) {
-      setError(e.message || 'Error signing up');
+    } catch (e: unknown) {
+      setError(e instanceof Error ? e.message : 'Error signing up');
     } finally {
       setLoading(false);
     }

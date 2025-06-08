@@ -2,9 +2,7 @@
 import Link from 'next/link';
 import { useUser } from '@auth0/nextjs-auth0';
 import { usePathname, useRouter } from 'next/navigation';
-import { FaUserCircle, FaSignOutAlt } from 'react-icons/fa';
 import Image from 'next/image';
-import { useState } from 'react';
 import UserMenu from './UserMenu';
 
 const navLinks = [
@@ -20,7 +18,6 @@ export default function Header() {
   const { user } = useUser();
   const pathname = usePathname();
   const router = useRouter();
-  const [menuOpen, setMenuOpen] = useState(false);
 
   return (
     <header style={{

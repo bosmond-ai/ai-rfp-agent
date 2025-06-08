@@ -6,7 +6,13 @@ import AdminPanelSettingsIcon from '@mui/icons-material/AdminPanelSettings';
 import LogoutIcon from '@mui/icons-material/Logout';
 import { useRouter } from 'next/navigation';
 
-export default function UserMenu({ user, isAdmin }: { user: any, isAdmin: boolean }) {
+interface User {
+  name?: string;
+  email?: string;
+  role?: string;
+}
+
+export default function UserMenu({ user, isAdmin }: { user: User, isAdmin: boolean }) {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
   const router = useRouter();
